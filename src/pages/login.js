@@ -10,6 +10,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import Box from 'react-bulma-components/lib/components/box';
 import Heading from 'react-bulma-components/lib/components/heading';
 import './styles.scss';
+import { isLoggedIn } from '../services/auth';
 import { navigate } from 'gatsby';
 
 export default class LogIn extends React.Component {
