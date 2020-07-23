@@ -1,0 +1,21 @@
+@charset "utf-8";
+// If need, change your variables before importing Bulma
+
+@import "~bulma/bulma.sass";
+
+body > div > div {
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    width: 100vw;
+    margin-top: auto;
+}
+
+.control .icon.show-hide {
+    pointer-events: all !important;
+    cursor: pointer;
+}

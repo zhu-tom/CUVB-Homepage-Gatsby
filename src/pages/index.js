@@ -1,22 +1,41 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from "react";
+import Hero from "../components/hero";
+import Tiles from "../components/tiles";
+import Section from "../components/section";
+import Layout from "../components/layout";
+import SectionHeader from "../components/section-header";
+import './styles.scss';
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link>
-  </Layout>
-)
-
-export default IndexPage
+export default function Home() {
+  return (
+    <Layout>
+      <Hero titleText="Welcome to the Carleton Volleyball Club"/>
+      <Section hasBgBis>
+        <SectionHeader titleText="Upcoming Events" subtitleText="Sign up soon!" isNew={true}/>
+        <Tiles/>
+      </Section>
+      <Section>
+        <SectionHeader titleText="About Us"/>
+        <div className="content is-medium">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. 
+            Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. 
+            Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+            Nulla accumsan, metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. 
+            Ut vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.
+          </p>
+        </div>
+      </Section>
+      <Section hasBgBis>
+        <SectionHeader titleText="Resources"/>
+      </Section>
+      <Section>
+        <SectionHeader titleText="Links"/>
+      </Section>
+    </Layout>
+  );
+}
