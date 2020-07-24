@@ -8,15 +8,15 @@ export function handler(event, handler, callback) {
             statusCode: 200,
             body: JSON.stringify({msg: uri})
         });
-        // const db = client.db("database");
-        // const users = db.collection("users");
+        const db = client.db("database");
+        const users = db.collection("users");
 
-        // users.findOne({email: 'admin'}).then((res) => {
-        //     callback(null, {
-        //         statusCode: 200,
-        //         body: JSON.stringify(res)
-        //     });
-        // });
+        users.findOne({email: 'admin'}).then((res) => {
+            callback(null, {
+                statusCode: 200,
+                body: JSON.stringify(res)
+            });
+        });
     }).catch((err) => {
         callback(null, {
             statusCode: 200,
