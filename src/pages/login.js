@@ -50,11 +50,13 @@ export default class LogIn extends React.Component {
         });
     }
 
-    render() {
+    componentDidMount() {
         if (isLoggedIn()) {
             navigate("/");
         }
+    }
 
+    render() {
         return (
             <Layout>
                 <Section>

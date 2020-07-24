@@ -68,11 +68,13 @@ export default class SignUp extends React.Component {
         });  
     }
 
-    render() {
+    componentDidMount() {
         if (isLoggedIn()) {
             navigate("/");
         }
+    }
 
+    render() {
         return (
             <Layout>
                 <Section>

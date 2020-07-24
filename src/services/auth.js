@@ -1,6 +1,6 @@
 const isBrowser = () => typeof window !== "undefined";
 
-const setUser = (user) => window.localStorage.setItem("currentUser", JSON.stringify(user));
+const setUser = (user) => isBrowser() ? window.localStorage.setItem("currentUser", JSON.stringify(user)) : null;
 
 export const handleLogin = (res) => {
     if (!res.error) {
@@ -9,8 +9,7 @@ export const handleLogin = (res) => {
 }
 
 export const getUser = () => {
-    const currUser = window.localStorage.getItem("currentUser");
-    return isBrowser() && currUser ? JSON.parse(currUser) : {};
+    return isBrowser() && window.localStorage.getItem("currentUser") ? JSON.parse(window.localStorage.getItem("currentUser")) : {};
 }
 
 export const isLoggedIn = () => {
