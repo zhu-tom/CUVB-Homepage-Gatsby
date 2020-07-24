@@ -10,10 +10,6 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("users", userSchema, "users");
 
 export function handler(event, context, callback) {
-    callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({msg: process.env.GATSBY_DB_USER})
-    });
     mongoose.connect(`mongodb+srv://${process.env.GATSBY_DB_USER}:${process.env.GATSBY_DB_PASS}@${process.env.GATSBY_DB_URL}/${process.env.GATSBY_DB_NAME}?retryWrites=true&w=majority`, {useNewUrlParser: true}).then(() => {
         const { email, password } = JSON.parse(event.body);
         User.findOne({ email: email }, (err, res) => {
