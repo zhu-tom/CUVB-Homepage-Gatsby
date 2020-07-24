@@ -10,15 +10,16 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model("users", userSchema, "users");
 
 export function handler(event, context, callback) {
-    mongoose.connect("mongodb+srv://admin:CUvb54321@cluster0.l96zo.mongodb.net/database?retryWrites=true&w=majority", {useNewUrlParser: true}).then(() => {
+    mongoose.connect(`mongodb+srv://${process.env.GATSBY_DB_USER}:${process.env.GATSBY_DB_PASS}@${process.env.GATSBY_DB_URL}/${process.env.GATSBY_DB_NAME}?retryWrites=true&w=majority`, {useNewUrlParser: true}).then(() => {
         const { email, password } = JSON.parse(event.body);
         User.findOne({ email: email }, (err, res) => {
             if (res) {
                 bcrypt.compare(password, res.password, (err, same) => {
                     if (same) {
+                        delete res.password;
                         callback(null, {
                             statusCode: 200,
-                            body: JSON.stringify({id: res._id, type: res.type, name: res.name, email: res.email})
+                            body: JSON.stringify(res)
                         });
                     }
                 });

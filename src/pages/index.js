@@ -9,7 +9,7 @@ import './styles.scss';
 export default function Home() {
   return (
     <Layout>
-      <Hero titleText="Welcome to the Carleton Volleyball Club"/>
+      <Hero titleText="Welcome to the Carleton Volleyball Club" size="fullheight-with-navbar"/>
       <Section hasBgBis>
         <SectionHeader titleText="Upcoming Events" subtitleText="Sign up soon!" isNew={true}/>
         <Tiles/>

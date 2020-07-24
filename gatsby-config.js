@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = {
@@ -46,6 +50,9 @@ module.exports = {
           authSource: 'admin',
           retryWrites: true,
           w: "majority"
+        },
+        map: {
+          events: { details: `text/markdown` }
         }
       },
     },
@@ -57,6 +64,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

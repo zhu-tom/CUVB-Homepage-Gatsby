@@ -10,7 +10,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import Box from 'react-bulma-components/lib/components/box';
 import Heading from 'react-bulma-components/lib/components/heading';
 import './styles.scss';
-import { isLoggedIn } from '../services/auth';
+import { isLoggedIn, handleLogin } from '../services/auth';
 import { navigate } from 'gatsby';
 
 export default class LogIn extends React.Component {
@@ -19,7 +19,8 @@ export default class LogIn extends React.Component {
         this.state = {
             email: "",
             password: "",
-            showPass: false
+            showPass: false,
+            loading: false,
         }
     }
 
@@ -33,6 +34,7 @@ export default class LogIn extends React.Component {
     }
 
     handleSubmit() {
+        this.setState({loading: true});
         fetch("/.netlify/functions/login", {
             headers: {
                 "Content-Type": "application/json"
@@ -41,8 +43,10 @@ export default class LogIn extends React.Component {
                 email: this.state.email,
                 password: this.state.password
             }),
+            method: "POST",
         }).then(res => res.json()).then(res => {
-            console.log(res);
+            handleLogin(res);
+            this.setState({loading: false});
         });
     }
 
@@ -61,7 +65,7 @@ export default class LogIn extends React.Component {
                                 <Field>
                                     <Label>Email</Label>
                                     <Control iconLeft>
-                                        <Input value={this.state.email} onChange={(e) => this.handleChange(e)} name="email" type="email" placeholder="e.g. alexsmith@gmail.com"/>
+                                        <Input value={this.state.email} disabled={this.state.loading} onChange={(e) => this.handleChange(e)} name="email" type="email" placeholder="e.g. alexsmith@gmail.com"/>
                                         <Icon align="left">
                                             <FontAwesomeIcon icon={faEnvelope}/>
                                         </Icon>
@@ -70,7 +74,7 @@ export default class LogIn extends React.Component {
                                 <Field>
                                     <Label>Password</Label>
                                     <Control iconLeft iconRight>
-                                        <Input value={this.state.password} onChange={(e) => this.handleChange(e)} name="password" type={this.state.showPass ? "text":"password"} placeholder="e.g. Password"/>
+                                        <Input value={this.state.password} disabled={this.state.loading} onChange={(e) => this.handleChange(e)} name="password" type={this.state.showPass ? "text":"password"} placeholder="e.g. Password"/>
                                         <Icon align="left">
                                             <FontAwesomeIcon icon={faLock}/>
                                         </Icon>
@@ -81,7 +85,7 @@ export default class LogIn extends React.Component {
                                 </Field>
                                 <Field>
                                     <Control>
-                                        <Button color="primary">Login</Button>
+                                        <Button className={this.state.loading && "is-loading"} onClick={() => this.handleSubmit()} color="primary">Login</Button>
                                     </Control>
                                 </Field>
                             </Box>                    

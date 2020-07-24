@@ -1,6 +1,6 @@
-import { set } from "mongoose";
+const isBrowser = () => typeof window !== "undefined";
 
-const setUser = (user) => window.localStorage.setItem("currentUser", JSON.stringify(user))
+const setUser = (user) => window.localStorage.setItem("currentUser", JSON.stringify(user));
 
 export const handleLogin = (res) => {
     if (!res.error) {
@@ -10,7 +10,7 @@ export const handleLogin = (res) => {
 
 export const getUser = () => {
     const currUser = window.localStorage.getItem("currentUser");
-    return currUser ? JSON.parse(currUser) : {};
+    return isBrowser() && currUser ? JSON.parse(currUser) : {};
 }
 
 export const isLoggedIn = () => {

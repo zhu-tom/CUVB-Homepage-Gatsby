@@ -12,8 +12,9 @@ const User = mongoose.model("users", userSchema, "users");
 
 export function handler(event, context, callback) {
     const { name, email, password } = JSON.parse(event.body);
+
     if (name && email && password) {
-        mongoose.connect("mongodb+srv://admin:CUvb54321@cluster0.l96zo.mongodb.net/database?retryWrites=true&w=majority", {useNewUrlParser: true}).then(() => {
+        mongoose.connect(`mongodb+srv://${process.env.GATSBY_DB_USER}:${process.env.GATSBY_DB_PASS}@${process.env.GATSBY_DB_URL}/${process.env.GATSBY_DB_NAME}?retryWrites=true&w=majority`, {useNewUrlParser: true}).then(() => {
             User.findOne({ email: email }).then(value => {
                 if (!value) {
                     bcrypt.hash(password, salt_rounds, (err, hash) => {
