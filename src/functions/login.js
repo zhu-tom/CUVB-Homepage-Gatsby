@@ -11,29 +11,25 @@ const User = mongoose.model("users", userSchema, "users");
 
 export function handler(event, context, callback) {
     mongoose.connect(`mongodb+srv://${process.env.GATSBY_DB_USER}:${process.env.GATSBY_DB_PASS}@${process.env.GATSBY_DB_URL}/${process.env.GATSBY_DB_NAME}?retryWrites=true&w=majority`, {useNewUrlParser: true}).then((res) => {
-        callback(null, {
-            statusCode: 200,
-            body: JSON.stringify({msg: res})
+        const { email, password } = JSON.parse(event.body);
+        User.findOne({ email: email }, (err, res) => {
+            if (res) {
+                bcrypt.compare(password, res.password, (err, same) => {
+                    if (same) {
+                        delete res.password;
+                        callback(null, {
+                            statusCode: 200,
+                            body: JSON.stringify(res)
+                        });
+                    }
+                });
+            } else {
+                callback(null, {
+                    statusCode: 500,
+                    body: JSON.stringify({err: 'no email match'})
+                });
+            }
         });
-        // const { email, password } = JSON.parse(event.body);
-        // User.findOne({ email: email }, (err, res) => {
-        //     if (res) {
-        //         bcrypt.compare(password, res.password, (err, same) => {
-        //             if (same) {
-        //                 delete res.password;
-        //                 callback(null, {
-        //                     statusCode: 200,
-        //                     body: JSON.stringify(res)
-        //                 });
-        //             }
-        //         });
-        //     } else {
-        //         callback(null, {
-        //             statusCode: 500,
-        //             body: JSON.stringify({err: 'no email match'})
-        //         });
-        //     }
-        // });
     }).catch((err) => {
         callback(null, {
             statusCode: 200,

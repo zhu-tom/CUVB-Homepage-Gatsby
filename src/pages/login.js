@@ -35,7 +35,7 @@ export default class LogIn extends React.Component {
 
     handleSubmit() {
         this.setState({loading: true});
-        fetch("/.netlify/functions/login", {
+        fetch("/api/login", {
             headers: {
                 "Content-Type": "application/json"
             },

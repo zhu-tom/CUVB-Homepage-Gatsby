@@ -45,7 +45,7 @@ export default class SignUp extends React.Component {
         }), () => {
             if (this.state.isEmailValid && this.state.isNameValid && this.state.isPasswordValid) {
                 this.setState({loading: true});
-                fetch("/.netlify/functions/signup", {
+                fetch("/api/signup", {
                     headers: {
                         "Content-Type": "application/json"
                     },
@@ -58,9 +58,8 @@ export default class SignUp extends React.Component {
                 })
                 .then(res => res.json()).then(res => {
                     console.log(res);
-                    this.setState({loading:false});
                     handleLogin(res);
-                    navigate("/");
+                    this.setState({loading:false});
                 }).catch((reason) => {
                     console.log(reason);
                 });
