@@ -8,3 +8,10 @@
     GATSBY_DB_PASS = "CUvb54321"
     GATSBY_DB_URL = "cluster0.l96zo.mongodb.net"
     GATSBY_DB_NAME = "database"
+
+[context.production]
+    [context.production.environment]
+        GATSBY_DB_USER = "admin"
+        GATSBY_DB_PASS = "CUvb54321"
+        GATSBY_DB_URL = "cluster0.l96zo.mongodb.net"
+        GATSBY_DB_NAME = "database"
