@@ -55,12 +55,10 @@
   "license": "0BSD",
   "scripts": {
     "develop": "gatsby develop",
-    "start": "run-p start:**",
-    "start:app": "npm run develop",
-    "start:lambda": "netlify-lambda serve src/functions",
-    "build": "gatsby build && netlify-lambda build src/functions",
+    "start": "gatsby build && node server/index.js",
+    "build": "gatsby build && node server/index.js",
     "build:app": "gatsby build",
-    "build:lambda": "netlify-lambda build src/functions"
+    "build:server": "node server/index.js"
   },
   "repository": {
     "type": "git",
