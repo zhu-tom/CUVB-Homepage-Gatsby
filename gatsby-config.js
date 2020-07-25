@@ -25,17 +25,12 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-nodejs`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         // Add any options here
       },
-    },
-    {
-      resolve: 'gatsby-plugin-express',
-      options: {
-        output: 'config/gatsby-express.json',
-      }
     },
     {
       resolve: `gatsby-source-filesystem`,

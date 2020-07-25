@@ -5,13 +5,18 @@ import SectionHeader from '../components/section-header';
 import { Router } from '@reach/router';
 import PrivateRoute from '../components/private-route';
 import Profile from '../components/profile';
+import { isLoggedIn } from '../services/auth';
+import { navigate } from 'gatsby';
+import { useEffect } from 'react';
 
 export default function Account() {
+    useEffect(() => {
+        if (!isLoggedIn()) navigate("/login");
+    });
+    
     return (
         <Layout>
-            <Router>
-                <PrivateRoute path="/account" component={Profile}/>
-            </Router>
+            <Profile/>
         </Layout>
     );
 }

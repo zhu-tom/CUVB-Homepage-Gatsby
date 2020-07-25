@@ -50,7 +50,15 @@ export default class LogIn extends React.Component {
         });
     }
 
-    componentDidMount() {
+    componentDidUpdate() {
+        this.checkLoggedIn();
+    }
+
+    componentWillMount() {
+        this.checkLoggedIn();
+    }
+
+    checkLoggedIn() {
         if (isLoggedIn()) {
             navigate("/");
         }

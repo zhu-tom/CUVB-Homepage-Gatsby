@@ -1,1 +1,1 @@
-web: gatsby build && node server.js
+web: gatsby build && node server/index.js

@@ -10,11 +10,16 @@ export default class Navbar extends React.Component {
         super(props);
         this.state = {
             navActive: false,
+            loggedIn: isLoggedIn(),
         }
     }
 
     handleExpand = () => {
         this.setState((prevState) => ({navActive: !prevState.navActive}));
+    }
+
+    componentWillUpdate() {
+        this.setState({loggedIn: isLoggedIn()});
     }
 
     render() {
@@ -68,7 +73,7 @@ export default class Navbar extends React.Component {
     
                 <div className="navbar-end">
                     {
-                        isLoggedIn() ? (
+                        this.state.loggedIn ? (
                             <div className="navbar-item has-dropdown is-hoverable">
                                 <a className="navbar-link">
                                     <span className="icon mr-2">
