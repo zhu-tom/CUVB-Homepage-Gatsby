@@ -4,20 +4,7 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-const { createProxyMiddleware } = require("http-proxy-middleware");
-
-module.exports = {
-  developMiddleware: app => {
-    app.use(
-      "/.netlify/functions/",
-      createProxyMiddleware({
-        target: "http://localhost:9000",
-        pathRewrite: {
-          "/.netlify/functions/": "",
-        },
-      })
-    )
-  },
+module.exports = {    
   siteMetadata: {
     title: `Carleton Volleyball`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
@@ -25,7 +12,6 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-nodejs`,
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {

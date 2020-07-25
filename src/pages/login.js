@@ -35,7 +35,8 @@ export default class LogIn extends React.Component {
 
     handleSubmit() {
         this.setState({loading: true});
-        fetch("/api/login", {
+        console.log(process.env.GATSBY_API_URL);
+        fetch(`${process.env.GATSBY_API_URL}/api/login`, {
             headers: {
                 "Content-Type": "application/json"
             },
