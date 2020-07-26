@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
   });
 }
 
-module.exports = {    
+module.exports = {
   siteMetadata: {
     title: `Carleton Volleyball`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
@@ -28,16 +28,16 @@ module.exports = {
     {
       resolve: `gatsby-source-mongodb`,
       options: {
-        connectionString: "mongodb+srv://admin:CUvb54321@cluster0.l96zo.mongodb.net",
-        dbName: 'database',
+        connectionString: `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_URL}`,
+        dbName: process.env.DB_NAME,
         collection: 'events',
         server: {
-          address: "cluster0-shard-00-01.l96zo.mongodb.net",
+          address: process.env.DB_ADDRESS,
           port: 27017,
         },
         auth: {
-          user: 'admin',
-          password: 'CUvb54321'
+          user: process.env.DB_USER,
+          password: process.env.DB_PASS
         },
         extraParams: {
           replicaSet: 'cluster0',
@@ -76,4 +76,8 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
+  proxy: {
+    prefix: '/api',
+    url: 'http://localhost:3000',
+  }
 }

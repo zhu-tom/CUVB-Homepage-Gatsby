@@ -21,7 +21,7 @@ export default class Navbar extends React.Component {
         return (
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
-                    <a className="navbar-item" href="https://bulma.io">
+                    <a className="navbar-item" href="/">
                         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo"/>
                     </a>
     
@@ -77,9 +77,9 @@ export default class Navbar extends React.Component {
                                     {getUser().name}
                                 </a>
                                 <div class="navbar-dropdown is-right">
-                                    <a class="navbar-item">
-                                        Overview
-                                    </a>
+                                    <Link to="/account" className="navbar-item">
+                                        Account
+                                    </Link>
                                     <a class="navbar-item">
                                         Elements
                                     </a>

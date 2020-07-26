@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 
 export default function PrivateRoute({ component: Component, allow, location, ...rest }) {
     useEffect(() => {
-        if ((!isLoggedIn() && location.pathname !== "/login") || (allow === "admin" && getUser().email !== "admin")) {
+        if ((!isLoggedIn() && location.pathname !== "/login") || (allow === "admin" && getUser()._id !== process.env.GATSBY_ADMIN_ID)) {
             navigate("/login");
             return null;
         }

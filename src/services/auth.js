@@ -1,4 +1,4 @@
-const isBrowser = () => typeof window !== "undefined";
+export const isBrowser = () => typeof window !== "undefined";
 
 const setUser = (user) => isBrowser() ? window.localStorage.setItem("currentUser", JSON.stringify(user)) : null;
 
@@ -16,6 +16,11 @@ export const isLoggedIn = () => {
     const user = getUser();
     return !!user._id;
 };
+
+export const isAdmin = () => {
+    const user = getUser();
+    return user._id === process.env.GATSBY_ADMIN_ID;
+}
 
 export const logout = (callback) => {
     setUser({});

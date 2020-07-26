@@ -10,7 +10,7 @@ import Button from 'react-bulma-components/lib/components/button';
 import Box from 'react-bulma-components/lib/components/box';
 import Heading from 'react-bulma-components/lib/components/heading';
 import './styles.scss';
-import { isLoggedIn, handleLogin } from '../services/auth';
+import { isLoggedIn, handleLogin, getUser, isAdmin } from '../services/auth';
 import { navigate } from 'gatsby';
 
 export default class LogIn extends React.Component {
@@ -35,8 +35,7 @@ export default class LogIn extends React.Component {
 
     handleSubmit() {
         this.setState({loading: true});
-        console.log(process.env.GATSBY_API_URL);
-        fetch(`${process.env.GATSBY_API_URL}/api/login`, {
+        fetch(`${process.env.GATSBY_API_URL || ""}/api/login`, {
             headers: {
                 "Content-Type": "application/json"
             },
@@ -61,7 +60,8 @@ export default class LogIn extends React.Component {
 
     checkLoggedIn() {
         if (isLoggedIn()) {
-            navigate("/");
+            if (isAdmin()) navigate("/admin");
+            else navigate("/");
         }
     }
 
