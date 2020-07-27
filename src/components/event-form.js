@@ -18,6 +18,7 @@ export default class EventForm extends React.Component {
             location: "",
             subtitle: "",
             loading: false,
+            isClient: false,
         }
 
     }
@@ -47,9 +48,12 @@ export default class EventForm extends React.Component {
                     end: res.date.end,
                     title: res.title,
                     location: res.location,
-                    subtitle: res.subtitle
+                    subtitle: res.subtitle,
+                    isClient: true
                 });
             });
+        } else {
+            this.setState({isClient: true});
         }
     }
 
@@ -130,10 +134,9 @@ export default class EventForm extends React.Component {
                     <div className="field">
                         <div className="control">
                             <label className="label">Markdown</label>
-                            <Editor
+                            {this.state.isClient && <Editor key={this.state.isClient ? "client":"server"}
                                 onChange={this.handleEdit}
-                                value={this.state.markdown}
-                                defaultValue={isBrowser() && window.localStorage.getItem("saved") || ""}/>
+                                defaultValue={this.state.markdown || isBrowser() && window.localStorage.getItem("saved") || ""}/>}
                         </div>
                     </div>
                     <div className="field">

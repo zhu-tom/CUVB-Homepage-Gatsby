@@ -2,7 +2,8 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import {Link} from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faClock, faCalendarAlt, faUserClock, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt, faClock } from '@fortawesome/free-regular-svg-icons';
+import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
 export default function Tiles() {
     return (

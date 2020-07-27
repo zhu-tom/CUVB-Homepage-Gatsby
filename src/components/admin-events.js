@@ -92,7 +92,7 @@ export function EventsList() {
                 {nodes.map((node, index) => (
                     <tr key={index}>
                         <td>{node._id}</td>
-                        <td>{node.date && new Date(node.date.day).toDateString()}</td>
+                        <td>{node.date && new Date(node.date.day).toISOString().slice(0,10)}</td>
                         <td>{node.date && node.date.start}</td>
                         <td>{node.date && node.date.end}</td>
                         <td>{node.title}</td>
