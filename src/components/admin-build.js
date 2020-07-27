@@ -6,7 +6,7 @@ export default function Build() {
 
     const rebuild = () => {
         setIsLoading(true);
-        fetch("/api/build", {
+        fetch(`${process.env.GATSBY_API_URL || ""}/api/build`, {
             headers: {
                 "Authorization": getUser()._id,
             },

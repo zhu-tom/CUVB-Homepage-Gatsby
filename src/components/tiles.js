@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
-export default function Tiles() {
+export default function Tiles({ limit }) {
     return (
         <div className="tile is-ancestor">
             <StaticQuery
@@ -33,6 +33,7 @@ export default function Tiles() {
                 render={(data) => {
                     let nodes = data.allMongodbDatabaseEvents.edges;
                     nodes = nodes.filter(({node}) => node.date && Date.parse(node.date.isoDate) > Date.now());
+                    if (limit) nodes = node.slice(0, limit);
                     return nodes.map(({ node }, index) => {
                         return (
                             <div key={index} className="tile is-parent">

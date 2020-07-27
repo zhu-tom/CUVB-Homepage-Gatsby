@@ -12,7 +12,7 @@ export default function Home() {
       <Hero titleText="Welcome to the Carleton Volleyball Club" size="fullheight-with-navbar"/>
       <Section hasBgBis>
         <SectionHeader titleText="Upcoming Events" subtitleText="Sign up soon!" isNew={true}/>
-        <Tiles/>
+        <Tiles limit={4}/>
       </Section>
       <Section>
         <SectionHeader titleText="About Us"/>
