@@ -22,11 +22,10 @@ export default class Navbar extends React.Component {
         this.setState({isClient: true});
     }
 
-    render() {
-        if (!this.state.isClient) return null;
-        const key = this.state.isClient ? "client":"server";
+    render() { 
+        const key = this.state.isClient ? "client":"server";       
         return (
-            <nav key={key} className="navbar is-light" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo"/>
@@ -73,7 +72,7 @@ export default class Navbar extends React.Component {
                     </div>
                 </div>
     
-                <div className="navbar-end">
+                {!this.state.isClient ? null : <div key={key} className="navbar-end">
                     {
                         isLoggedIn() ? (
                             <div className="navbar-item has-dropdown is-hoverable">
@@ -113,7 +112,7 @@ export default class Navbar extends React.Component {
                         )
                         
                     }
-                </div>
+                </div>}
             </nav>
         );
     } 
