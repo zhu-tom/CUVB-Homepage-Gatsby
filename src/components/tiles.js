@@ -1,32 +1,56 @@
 import React from 'react';
+import { StaticQuery, graphql } from 'gatsby';
+import {Link} from '@reach/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendar, faClock, faCalendarAlt, faUserClock, faLocationArrow } from '@fortawesome/free-solid-svg-icons';
 
 export default function Tiles() {
     return (
         <div className="tile is-ancestor">
-            <div className="tile is-parent">
-                <div className="tile is-child box">
-                    <p className="title">One</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                </div>
-            </div>
-            <div className="tile is-parent">
-                <div className="tile is-child box">
-                    <p className="title">Two</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                </div>
-            </div>
-            <div className="tile is-parent">
-                <div className="tile is-child box">
-                    <p className="title">Three</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                </div>
-            </div>
-            <div className="tile is-parent">
-                <div className="tile is-child box">
-                    <p className="title">Four</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-                </div>
-            </div>
+            <StaticQuery
+                query={graphql`
+                    query {
+                        allMongodbDatabaseEvents(sort: {fields: date___day}) {
+                            edges {
+                                node {
+                                    date {
+                                        isoDate: day
+                                        formattedDate: day(formatString: "dddd, MMMM Do")
+                                        fromNowDate: day(fromNow: true)
+                                        end
+                                        start
+                                    }
+                                    title
+                                    location
+                                    mongodb_id
+                                    subtitle
+                                }
+                            }
+                        }
+                    }
+                `}
+                render={(data) => {
+                    let nodes = data.allMongodbDatabaseEvents.edges;
+                    nodes = nodes.filter(({node}) => node.date && Date.parse(node.date.isoDate) > Date.now());
+                    return nodes.map(({ node }, index) => {
+                        return (
+                            <div key={index} className="tile is-parent">
+                                <div style={{justifyContent: "space-between", display: "flex", flexDirection:"column"}} className="tile is-child box">
+                                    <div>
+                                        <p className={`title ${node.subtitle ? "":"is-spaced"}`}>{node.title}</p>
+                                        <p className="subtitle">{node.subtitle}</p>
+                                        <p className={`subtitle mb-1`}><span className="icon mr-2"><FontAwesomeIcon icon={faCalendarAlt}/></span>{node.date && node.date.formattedDate}</p>
+                                        <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faClock}/></span>{node.date.start} - {node.date.end}</p>
+                                        <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
+                                    </div>
+                                    <div>
+                                        <Link to={`/events/${node.mongodb_id}`} className="is-primary is-pulled-right button">Sign Up</Link>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    });
+                }}/>
         </div>
     );
 }

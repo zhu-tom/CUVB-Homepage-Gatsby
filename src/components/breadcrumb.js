@@ -3,11 +3,15 @@ import { Link } from '@reach/router';
 
 const items = {
     '/admin':"Dashboard",
-    '/add-event':"Add Event"
+    '/add':"Add",
+    '/build':"Build",
+    '/events':"Events",
+    '/edit':"Edit"
 }
 
 export default function Breadcrumb({ location, children }) {
-    const paths = location.pathname.split(/(?=\/)/);
+    let paths = location.pathname.split(/(?=\/)/);
+    if (paths[paths.length-1] === "/") paths.splice(paths.length-1, 1);
     return (
         <div className="section pb-0">
             <div className="container">
@@ -16,7 +20,7 @@ export default function Breadcrumb({ location, children }) {
                         {
                             paths.map((path, index) => {
                                 return (
-                                    <li className={index === paths.length - 1 ? "is-active":""}><Link to={paths.slice(0, index+1).join()}>{items[path]}</Link></li>
+                                    <li key={index} className={index === paths.length - 1 ? "is-active":""}><Link to={paths.slice(0, index+1).join("")}>{items[path] || path.slice(1)}</Link></li>
                                 )
                             })
                         }

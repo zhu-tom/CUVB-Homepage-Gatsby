@@ -38,13 +38,11 @@ exports.createPages = async ({ graphql, actions }) => {
             allMongodbDatabaseEvents {
                 edges {
                     node {
+                        mongodb_id
                         details {
                             childMarkdownRemark {
                                 html
                                 id
-                                frontmatter {
-                                    title
-                                }
                             }
                         }
                     }
@@ -54,11 +52,12 @@ exports.createPages = async ({ graphql, actions }) => {
     `);
 
     result.data.allMongodbDatabaseEvents.edges.forEach(({ node }) => {
+        console.log(node);
         createPage({
-            path: `/events/${node.details.childMarkdownRemark.id}`,
+            path: `/events/${node.mongodb_id}`,
             component: path.resolve(`./src/templates/event-post.js`),
             context: {
-                id: node.details.childMarkdownRemark.id,
+                id: node.mongodb_id,
             }
         });
     })

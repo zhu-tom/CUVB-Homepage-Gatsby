@@ -14,13 +14,13 @@ export default class Event extends React.Component {
     }
 
     render() {
-        const post = this.props.data.mongodbDatabaseEvents.details.childMarkdownRemark;
+        const post = this.props.data.mongodbDatabaseEvents.details;
 
         return (
             <Layout>
                 <Hero titleText="Event" subtitleText="This is an event"/>
                 <Section>
-                    <div className="content" dangerouslySetInnerHTML={{__html: post.html}}></div>
+                    <div className="content" dangerouslySetInnerHTML={{__html: post ? post.childMarkdownRemark.html : ""}}></div>
                     <button className="button is-primary" onClick={() => this.handleSignUp()}>Sign Up</button>
                 </Section>
             </Layout>
@@ -30,16 +30,13 @@ export default class Event extends React.Component {
 
 export const query = graphql`
     query($id: String!) {
-        mongodbDatabaseEvents(details: {childMarkdownRemark: {id: {eq: $id}}}) {
-            id
+        mongodbDatabaseEvents(mongodb_id: {eq: $id}) {
             details {
               childMarkdownRemark {
                 html
-                frontmatter {
-                    title
-                }
               }
             }
+            title
           }
     }
 `;

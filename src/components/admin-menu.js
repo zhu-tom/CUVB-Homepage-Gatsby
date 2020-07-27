@@ -17,18 +17,18 @@ export default function Menu() {
                 General
             </p>
             <ul class="menu-list">
-                <li><Navlink to="/admin">Dashboard</Navlink></li>
+                <li><Navlink to="/admin/">Dashboard</Navlink></li>
                 <li><a>Customers</a></li>
             </ul>
             <p class="menu-label">
                 Administration
             </p>
             <ul class="menu-list">
-                <li><a>Team Settings</a></li>
+                <li><Navlink to="/admin/build">Site Build</Navlink></li>
                 <li>
-                    <a>Events</a>
+                    <Navlink to="/admin/events">Events</Navlink>
                     <ul>
-                        <li><Navlink to="/admin/add-event">Add</Navlink></li>
+                        <li><Navlink to="/admin/events/add">Add</Navlink></li>
                         <li><a>Edit</a></li>
                         <li><a>Overview</a></li>
                     </ul>
