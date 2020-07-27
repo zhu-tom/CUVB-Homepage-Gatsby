@@ -10,6 +10,7 @@ export default class Navbar extends React.Component {
         super(props);
         this.state = {
             navActive: false,
+            isClient: false,
         }
     }
 
@@ -17,9 +18,15 @@ export default class Navbar extends React.Component {
         this.setState((prevState) => ({navActive: !prevState.navActive}));
     }
 
+    componentDidMount() {
+        this.setState({isClient: true});
+    }
+
     render() {
+        if (!this.state.isClient) return null;
+        const key = this.state.isClient ? "client":"server";
         return (
-            <nav className="navbar is-light" role="navigation" aria-label="main navigation">
+            <nav key={key} className="navbar is-light" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
                         <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo"/>
