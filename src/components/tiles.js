@@ -33,7 +33,7 @@ export default function Tiles({ limit }) {
                 render={(data) => {
                     let nodes = data.allMongodbDatabaseEvents.edges;
                     nodes = nodes.filter(({node}) => node.date && Date.parse(node.date.isoDate) > Date.now());
-                    if (limit) nodes = node.slice(0, limit);
+                    if (limit) nodes = nodes.slice(0, limit);
                     return nodes.map(({ node }, index) => {
                         return (
                             <div key={index} className="tile is-parent">
