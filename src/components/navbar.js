@@ -28,7 +28,7 @@ export default class Navbar extends React.Component {
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                     <a className="navbar-item" href="/">
-                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28" alt="logo"/>
+                        <img src="/static/a730027d202652391ec3976de545c860/497c6/cuvc-logo.png" style={{maxWidth: '200px', maxHeight:'50px', width: 'auto', height: 'auto'}} alt="logo"/>
                     </a>
     
                     <a onClick={() => this.handleExpand()} role="button" className={`navbar-burger burger ${this.state.navActive && 'is-active'}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
