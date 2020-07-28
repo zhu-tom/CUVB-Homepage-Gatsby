@@ -45,7 +45,7 @@ export default class SignUp extends React.Component {
         }), () => {
             if (this.state.isEmailValid && this.state.isNameValid && this.state.isPasswordValid) {
                 this.setState({loading: true});
-                fetch(`${process.env.GATSBY_API_URL}/api/signup`, {
+                fetch(`${process.env.GATSBY_API_URL || ""}/api/signup`, {
                     headers: {
                         "Content-Type": "application/json"
                     },

@@ -52,7 +52,6 @@ exports.createPages = async ({ graphql, actions }) => {
     `);
 
     result.data.allMongodbDatabaseEvents.edges.forEach(({ node }) => {
-        console.log(node);
         createPage({
             path: `/events/${node.mongodb_id}`,
             component: path.resolve(`./src/templates/event-post.js`),

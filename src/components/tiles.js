@@ -4,6 +4,7 @@ import {Link} from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import { getUser, isLoggedIn } from '../services/auth';
 
 export default function Tiles({ limit }) {
     return (
@@ -46,7 +47,7 @@ export default function Tiles({ limit }) {
                                         <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
                                     </div>
                                     <div>
-                                        <Link to={`/events/${node.mongodb_id}`} className="is-primary is-pulled-right button">Sign Up</Link>
+                                        <Link to={`/events/${node.mongodb_id}`} className="is-link is-pulled-right button">More</Link>
                                     </div>
                                 </div>
                             </div>

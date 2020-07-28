@@ -6,7 +6,8 @@ const items = {
     '/add':"Add",
     '/build':"Build",
     '/events':"Events",
-    '/edit':"Edit"
+    '/edit':"Edit",
+    '/attendees':"Attendees",
 }
 
 export default function Breadcrumb({ location, children }) {
