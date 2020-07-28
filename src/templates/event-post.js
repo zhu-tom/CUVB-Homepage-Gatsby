@@ -7,6 +7,7 @@ import { getUser, isLoggedIn } from '../services/auth';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClock } from '@fortawesome/free-regular-svg-icons';
 import { faLocationArrow } from '@fortawesome/free-solid-svg-icons';
+import SEO from '../components/seo';
 
 
 export default class Event extends React.Component {
@@ -73,15 +74,15 @@ export default class Event extends React.Component {
         const node = this.props.data.mongodbDatabaseEvents;
          return (
             <Layout>
+                <SEO title={node.title}/>
                 <Hero titleText={node.title} subtitleText={node.subtitle}/>
                 <Section>
                     <p className={`subtitle mb-1`}><span className="icon mr-2"><FontAwesomeIcon icon={faCalendarAlt}/></span>{node.date && node.date.formattedDate}</p>
                     <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faClock}/></span>{node.date.start} - {node.date.end}</p>
                     <p className="subtitle"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
                     <div className="content" dangerouslySetInnerHTML={{__html: post ? post.childMarkdownRemark.html : ""}}></div>
-                    <button className={`button ${this.state.signedUp ? 'is-warning':'is-primary'} ${this.state.loading ? "is-loading":""}`} onClick={() => this.handleSignUp()}>{this.state.signedUp ? "Signed Up":"Sign Up"}</button>
+                    <button className={`button ${this.state.signedUp ? 'is-warning':'is-primary'} ${this.state.loading ? "is-loading":""}`} onClick={() => this.handleSignUp()}>{this.state.signedUp ? "Cancel":"Sign Up"}</button>
                 </Section>
-                
             </Layout>
         );
     }

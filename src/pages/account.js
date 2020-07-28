@@ -7,6 +7,7 @@ import PrivateRoute from '../components/private-route';
 import Profile from '../components/profile';
 import { isLoggedIn } from '../services/auth';
 import { navigate } from 'gatsby';
+import SEO from '../components/seo';
 import { useEffect } from 'react';
 
 export default function Account() {
@@ -16,6 +17,7 @@ export default function Account() {
     
     return (
         <Layout>
+            <SEO title="My Account"/>
             <Profile/>
         </Layout>
     );

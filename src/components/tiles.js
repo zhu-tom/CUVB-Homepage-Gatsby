@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import {Link} from '@reach/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -47,7 +47,7 @@ export default function Tiles({ limit }) {
                                         <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
                                     </div>
                                     <div>
-                                        <Link to={`/events/${node.mongodb_id}`} className="is-link is-pulled-right button">More</Link>
+                                        <VisitButton event_id={node.mongodb_id}/>
                                     </div>
                                 </div>
                             </div>
@@ -55,5 +55,31 @@ export default function Tiles({ limit }) {
                     });
                 }}/>
         </div>
+    );
+}
+
+function VisitButton({event_id}) {
+    const [isSignedUp, setIsSignedUp] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        fetch(`${process.env.GATSBY_API_URL||""}/api/events/checkSignedUp`, {
+            method: "POST",
+            body: JSON.stringify({
+                event_id: event_id,
+                user_id: getUser()._id,
+            }),
+            headers: {
+                "Content-Type":"application/json"
+            }
+        }).then(res => res.json()).then(res => {
+            setIsSignedUp(res.err);
+            setIsLoading(false);
+        });
+    }, []);
+
+    return (
+        <Link to={`/events/${event_id}`} className={`${isSignedUp ? 'is-warning':'is-primary'} ${isLoading ? 'is-loading':''} is-pulled-right button`}>{isSignedUp ? 'Cancel':'Sign Up'}</Link>
     );
 }

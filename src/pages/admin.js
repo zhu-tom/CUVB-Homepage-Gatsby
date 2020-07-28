@@ -9,12 +9,13 @@ import { isLoggedIn, isAdmin } from "../services/auth";
 import { navigate } from "gatsby";
 import EventAttendees from "../components/admin-attendees";
 import Detail from "../components/attendees-detail";
+import SEO from "../components/seo";
  
 export default function Admin({location}) {
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (!isLoggedIn() && !isAdmin()) navigate("/login");
+        if (!(isLoggedIn() && isAdmin())) navigate("/login");
     });
 
     useEffect(() => {
@@ -25,6 +26,7 @@ export default function Admin({location}) {
 
     return (
         <Dashboard location={location}>
+            <SEO title="Admin"/>
             <Section>
                 <Router basepath="/admin">
                     <Build path="/build"/>

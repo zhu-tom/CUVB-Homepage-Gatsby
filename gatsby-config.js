@@ -6,9 +6,9 @@ if (process.env.NODE_ENV !== "production") {
 
 module.exports = {
   siteMetadata: {
-    title: `Carleton Volleyball`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `Carleton Volleyball Club`,
+    description: `Homepage of the Carleton Volleyball Club`,
+    author: `Tom Zhu`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

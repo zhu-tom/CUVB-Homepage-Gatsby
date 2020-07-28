@@ -5,10 +5,12 @@ import Section from "../components/section";
 import Layout from "../components/layout";
 import SectionHeader from "../components/section-header";
 import './styles.scss';
+import SEO from "../components/seo";
 
 export default function Home() {
   return (
     <Layout>
+      <SEO title="Home"/>
       <Hero titleText="Welcome to the Carleton Volleyball Club" size="fullheight-with-navbar"/>
       <Section hasBgBis>
         <SectionHeader titleText="Upcoming Events" subtitleText="Sign up soon!" isNew={true}/>

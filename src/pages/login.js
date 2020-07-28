@@ -12,6 +12,7 @@ import Heading from 'react-bulma-components/lib/components/heading';
 import './styles.scss';
 import { isLoggedIn, handleLogin, getUser, isAdmin } from '../services/auth';
 import { navigate } from 'gatsby';
+import SEO from '../components/seo';
 
 export default class LogIn extends React.Component {
     constructor(props) {
@@ -68,6 +69,7 @@ export default class LogIn extends React.Component {
     render() {
         return (
             <Layout>
+                <SEO title="Login"/>
                 <Section>
                     <div className="columns is-mobile is-centered">
                         <div className="column is-half">
