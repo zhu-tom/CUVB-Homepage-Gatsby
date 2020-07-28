@@ -69,10 +69,9 @@ export default class Navbar extends React.Component {
                                 </a>
                             </div>
                         </div>
-                    </div>
-                </div>
-    
-                {!this.state.isClient ? null : <div key={key} className="navbar-end">
+                    </div>    
+                {!this.state.isClient ? null : 
+                <div key={key} className="navbar-end">
                     {
                         isLoggedIn() ? (
                             <div className="navbar-item has-dropdown is-hoverable">
@@ -113,6 +112,7 @@ export default class Navbar extends React.Component {
                         
                     }
                 </div>}
+                </div>
             </nav>
         );
     } 
