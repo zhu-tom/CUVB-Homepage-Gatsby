@@ -72,7 +72,7 @@ export default class LogIn extends React.Component {
                 <SEO title="Login"/>
                 <Section>
                     <div className="columns is-mobile is-centered">
-                        <div className="column is-half">
+                        <div className="column is-half-desktop is-three-fifths-tablet is-full-mobile">
                             <Box>
                                 <Heading size={3}>Log In</Heading>
                                 <Field>

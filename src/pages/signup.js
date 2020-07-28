@@ -89,7 +89,7 @@ export default class SignUp extends React.Component {
                 <SEO title="Sign Up"/>
                 <Section>
                     <div className="columns is-mobile is-centered">
-                        <div className="column is-half">
+                        <div className="column is-half-desktop is-three-fifths-tablet is-full-mobile">
                             <div className="box">
                                 <h3 className="title is-3">Sign Up</h3>
                                 <FormField label="Name">
