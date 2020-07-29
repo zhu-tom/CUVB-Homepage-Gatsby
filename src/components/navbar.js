@@ -5,6 +5,21 @@ import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { navigate } from 'gatsby';
 
+const Logo = ({children}) => {
+    return (
+        <div className="navbar-brand">
+            <a className="navbar-item" href="/">
+                <img
+                    src="https://i.ibb.co/XJF3wpq/Untitled-design.png"
+                    alt="Logo"
+                    style={{maxWidth: '200px', maxHeight:'50px', width: 'auto', height: 'auto'}}/>
+            </a>
+            {children}
+        </div>
+        
+        
+    );
+}
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -26,17 +41,14 @@ export default class Navbar extends React.Component {
         const key = this.state.isClient ? "client":"server";       
         return (
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
-                <div className="navbar-brand">
-                    <a className="navbar-item" href="/">
-                        <img src="/static/a730027d202652391ec3976de545c860/497c6/cuvc-logo.png" style={{maxWidth: '200px', maxHeight:'50px', width: 'auto', height: 'auto'}} alt="logo"/>
-                    </a>
+                <Logo>
     
                     <a onClick={() => this.handleExpand()} role="button" className={`navbar-burger burger ${this.state.navActive && 'is-active'}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                     </a>
-                </div>
+                </Logo>
     
                 <div id="navbarBasicExample" className={`navbar-menu is-light ${this.state.navActive && 'is-active'}`}>
                     <div className="navbar-start">
