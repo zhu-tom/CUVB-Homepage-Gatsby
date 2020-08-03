@@ -93,18 +93,18 @@ export default class Navbar extends React.Component {
                                     </span>
                                     {getUser().name}
                                 </a>
-                                <div class="navbar-dropdown is-right">
+                                <div className="navbar-dropdown is-right">
                                     <Link to="/account" className="navbar-item">
                                         Account
                                     </Link>
-                                    <a class="navbar-item">
+                                    <a className="navbar-item">
                                         Elements
                                     </a>
-                                    <a class="navbar-item">
+                                    <a className="navbar-item">
                                         Components
                                     </a>
-                                    <hr class="navbar-divider"/>
-                                    <a class="navbar-item" onClick={() => logout(() => navigate("/login"))}>
+                                    <hr className="navbar-divider"/>
+                                    <a className="navbar-item" onClick={() => logout(() => navigate("/login"))}>
                                         Logout
                                     </a>
                                 </div>

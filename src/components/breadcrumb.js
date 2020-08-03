@@ -16,7 +16,7 @@ export default function Breadcrumb({ location, children }) {
     return (
         <div className="section pb-0">
             <div className="container">
-                <nav class="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
+                <nav className="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
                     <ul>
                         {
                             paths.map((path, index) => {

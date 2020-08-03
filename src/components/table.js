@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Table({ headers, children }) {
     return (
@@ -15,4 +16,9 @@ export default function Table({ headers, children }) {
             </tbody>
         </table>
     );
+}
+
+Table.propTypes = {
+    headers: PropTypes.arrayOf(PropTypes.string),
+    children: PropTypes.any
 }

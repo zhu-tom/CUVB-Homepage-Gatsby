@@ -7,11 +7,11 @@ export default function Dashboard({children, location}) {
     return (
         <>
             <Navbar/>
-            <div class="columns">
-                <div class="column is-one-quarter">
+            <div className="columns">
+                <div className="column is-one-quarter">
                     <Menu/>
                 </div>
-                <div class="column">
+                <div className="column">
                     <Breadcrumb location={location}/>
                     {children}
                 </div>

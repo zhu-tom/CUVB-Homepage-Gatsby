@@ -33,7 +33,7 @@ export default function Tiles({ limit }) {
                 `}
                 render={(data) => {
                     let nodes = data.allMongodbDatabaseEvents.edges;
-                    nodes = nodes.filter(({node}) => node.date && Date.parse(node.date.isoDate) > Date.now());
+                    nodes = nodes.filter(({node}) => node.date && (Date.parse(node.date.isoDate) + (parseInt(node.date.end.slice(0, 2)) * 60 * 60 * 1000))> Date.now());
                     if (limit) nodes = nodes.slice(0, limit);
                     return nodes.map(({ node }, index) => {
                         return (

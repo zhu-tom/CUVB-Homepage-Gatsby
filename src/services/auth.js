@@ -17,9 +17,17 @@ export const isLoggedIn = () => {
     return !!user._id;
 };
 
-export const isAdmin = () => {
+export const isAdmin = async () => {
     const user = getUser();
-    return user._id === process.env.GATSBY_ADMIN_ID;
+    let result = await fetch(`${process.env.GATSBY_API_URL || ""}/api/authenticate`, {
+        method: "GET",
+        headers: {
+            "Content-Type":"application/json",
+            "Authorization": user._id
+        }
+    });
+    result = await result.json();
+    return result.isAdmin;
 }
 
 export const logout = (callback) => {

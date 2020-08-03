@@ -19,3 +19,14 @@ footer {
     pointer-events: all !important;
     cursor: pointer;
 }
+
+.accordion-head {
+    pointer-events: all;
+    cursor: pointer;
+}
+
+.accordion-body {
+    max-height: 0;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+}

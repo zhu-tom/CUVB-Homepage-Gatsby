@@ -6,6 +6,7 @@ import Layout from "../components/layout";
 import SectionHeader from "../components/section-header";
 import './styles.scss';
 import SEO from "../components/seo";
+import { Accordion } from "../components/accordion";
 
 export default function Home() {
   return (
@@ -33,10 +34,36 @@ export default function Home() {
         </div>
       </Section>
       <Section hasBgBis>
-        <SectionHeader titleText="Resources"/>
+        <SectionHeader titleText="FAQ"/>
+        <Accordion>
+          <div header="Question 1">
+            This is the answer to question 1
+          </div>
+          <div header="Question 2">
+            This is the answer to question 2
+          </div>
+        </Accordion>
       </Section>
       <Section>
-        <SectionHeader titleText="Links"/>
+        <SectionHeader titleText="Resources"/>
+        
+        <div className="content is-medium">
+          <div className="columns is-desktop">
+            <div className="column">
+              <h6>Rules</h6>
+              <ul>
+                <li><a href="http://www.fivb.org/en/refereeing-rules/documents/FIVB-Volleyball_Rules_2017-2020-EN-v06.pdf" target="_blank">Official FIVB Indoor Rules</a></li>
+                <li><a href="https://www.fivb.org/EN/Refereeing-Rules/Documents/FIVB-BeachVolleyball_Rules_2017-2020-EN-v05.pdf">Official FIVB Beach Rules</a></li>
+              </ul>
+            </div>
+            <div className="column">
+              <h6>How to Play</h6>
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </Section>
     </Layout>
   );

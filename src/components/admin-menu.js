@@ -4,26 +4,26 @@ import { Link } from '@reach/router';
 const Navlink = props => (
     <Link
     {...props}
-    getProps={({ isCurrent }) => ({
-        className: isCurrent ? "is-active":""
+    getProps={({ isPartiallyCurrent }) => ({
+        className: isPartiallyCurrent ? "is-active":""
     })}/>
 );
 
 export default function Menu() {
     return (
-        <aside class="menu has-background-white-bis px-3 py-3">
-            <h2 style={{textAlign: "center"}} class="title is-2">Admin</h2>
-            <p class="menu-label">
+        <aside className="menu has-background-white-bis px-3 py-3">
+            <h2 style={{textAlign: "center"}} className="title is-2">Admin</h2>
+            <p className="menu-label">
                 General
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
                 <li><Navlink to="/admin/">Dashboard</Navlink></li>
                 <li><a>Customers</a></li>
             </ul>
-            <p class="menu-label">
+            <p className="menu-label">
                 Administration
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
                 <li><Navlink to="/admin/build">Build</Navlink></li>
                 <li>
                     <Navlink to="/admin/events">Events</Navlink>
@@ -33,7 +33,7 @@ export default function Menu() {
                     </ul>
                 </li>
                 <li>
-                    <a>Users</a>
+                    <Navlink to="/admin/users/">Users</Navlink>
                     <ul>
                         <li><a>Send Mail</a></li>
                     </ul>
@@ -41,10 +41,10 @@ export default function Menu() {
                 <li><a>Cloud Storage Environment Settings</a></li>
                 <li><a>Authentication</a></li>
             </ul>
-            <p class="menu-label">
+            <p className="menu-label">
                 Transactions
             </p>
-            <ul class="menu-list">
+            <ul className="menu-list">
                 <li><a>Payments</a></li>
                 <li><a>Transfers</a></li>
                 <li><a>Balance</a></li>

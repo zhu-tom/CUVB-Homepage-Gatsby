@@ -10,16 +10,22 @@ import { navigate } from "gatsby";
 import EventAttendees from "../components/admin-attendees";
 import Detail from "../components/attendees-detail";
 import SEO from "../components/seo";
+import Users from "../components/admin-users";
+import EmailForm from "../components/admin-mail";
  
 export default function Admin({location}) {
     const [loggedIn, setLoggedIn] = useState(false);
 
     useEffect(() => {
-        if (!(isLoggedIn() && isAdmin())) navigate("/login");
+        isAdmin().then((admin) => {
+            if (!(isLoggedIn() && admin)) navigate("/login");
+        });
     });
 
     useEffect(() => {
-        if (isLoggedIn() && isAdmin()) setLoggedIn(true);
+        isAdmin().then((admin) => {
+            if (isLoggedIn() && admin) setLoggedIn(true);
+        });
     }, []);
 
     if (!loggedIn) return null;
@@ -35,6 +41,8 @@ export default function Admin({location}) {
                     <EventForm path="/events/:eventId"/>
                     <EventAttendees path="/events/attendees"/>
                     <Detail path="/events/attendees/:eventId"/>
+                    <Users path="/users"/>
+                    <EmailForm path="/users/mail"/>
                 </Router>
             </Section>
         </Dashboard>
