@@ -20,6 +20,7 @@ const Logo = ({children}) => {
         
     );
 }
+
 export default class Navbar extends React.Component {
     constructor(props) {
         super(props);
@@ -27,6 +28,7 @@ export default class Navbar extends React.Component {
             navActive: false,
             isClient: false,
         }
+        this.scrollTo = this.scrollTo.bind(this);
     }
 
     handleExpand = () => {
@@ -35,6 +37,14 @@ export default class Navbar extends React.Component {
 
     componentDidMount() {
         this.setState({isClient: true});
+    }
+
+    scrollTo({target}) {
+        if (target.dataset.target) {
+            this.props.refs[target.dataset.target].current.scrollIntoView({
+                behavior: "smooth"
+            });
+        }
     }
 
     render() { 
@@ -55,28 +65,28 @@ export default class Navbar extends React.Component {
                         <Link to="/" className="navbar-item">
                             Home
                         </Link>
-    
-                        <a className="navbar-item">
-                            Documentation
+                        <a onClick={this.scrollTo} data-target="events" className="navbar-item">
+                            Events
                         </a>
-    
+                        <a onClick={this.scrollTo} data-target="about" className="navbar-item">
+                            About
+                        </a>
                         <div className="navbar-item has-dropdown is-hoverable">
                             <a className="navbar-link">
                             More
                             </a>
-    
                             <div className="navbar-dropdown">
-                                <a className="navbar-item">
-                                    About
+                                <a onClick={this.scrollTo} data-target="faq" className="navbar-item">
+                                    FAQ
                                 </a>
-                                <a className="navbar-item">
-                                    Jobs
+                                <a onClick={this.scrollTo} data-target="resources" className="navbar-item">
+                                    Resources
                                 </a>
-                                <a className="navbar-item">
+                                <a onClick={this.scrollTo} data-target="resources" className="navbar-item">
                                     Contact
                                 </a>
                                 <hr className="navbar-divider"/>
-                                <a className="navbar-item">
+                                <a href="mailto:carletonvolleyballclub@gmail.com" className="navbar-item">
                                     Report an issue
                                 </a>
                             </div>
@@ -97,12 +107,6 @@ export default class Navbar extends React.Component {
                                     <Link to="/account" className="navbar-item">
                                         Account
                                     </Link>
-                                    <a className="navbar-item">
-                                        Elements
-                                    </a>
-                                    <a className="navbar-item">
-                                        Components
-                                    </a>
                                     <hr className="navbar-divider"/>
                                     <a className="navbar-item" onClick={() => logout(() => navigate("/login"))}>
                                         Logout

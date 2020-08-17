@@ -13,11 +13,11 @@ export default function Home() {
     <Layout>
       <SEO title="Home"/>
       <Hero titleText="Welcome to the Carleton Volleyball Club" size="fullheight-with-navbar"/>
-      <Section hasBgBis>
+      <Section id="events" hasBgBis>
         <SectionHeader titleText="Upcoming Events" subtitleText="Sign up soon!" isNew={true}/>
         <Tiles limit={4}/>
       </Section>
-      <Section>
+      <Section id="about">
         <SectionHeader titleText="About Us"/>
         <div className="content is-medium">
           <p>
@@ -33,7 +33,7 @@ export default function Home() {
           </p>
         </div>
       </Section>
-      <Section hasBgBis>
+      <Section id="faq" hasBgBis>
         <SectionHeader titleText="FAQ"/>
         <Accordion>
           <div header="Question 1">
@@ -44,9 +44,8 @@ export default function Home() {
           </div>
         </Accordion>
       </Section>
-      <Section>
+      <Section id="resources">
         <SectionHeader titleText="Resources"/>
-        
         <div className="content is-medium">
           <div className="columns is-desktop">
             <div className="column">
@@ -58,6 +57,20 @@ export default function Home() {
             </div>
             <div className="column">
               <h6>How to Play</h6>
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+          </div>
+          <div className="columns is-desktop">
+            <div className="column">
+              <h6>Contact</h6>
+              <ul>
+                <li></li>
+              </ul>
+            </div>
+            <div className="column">
+              <h6>Forms</h6>
               <ul>
                 <li></li>
               </ul>
