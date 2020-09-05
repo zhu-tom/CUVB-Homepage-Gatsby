@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { Link, useLocation } from '@reach/router';
 import { isLoggedIn, getUser, logout } from '../services/auth';
 import { faUserAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,8 +16,6 @@ const Logo = ({children}) => {
             </a>
             {children}
         </div>
-        
-        
     );
 }
 
@@ -28,22 +26,25 @@ export default class Navbar extends React.Component {
             navActive: false,
             isClient: false,
         }
-        this.scrollTo = this.scrollTo.bind(this);
-    }
 
-    handleExpand = () => {
-        this.setState((prevState) => ({navActive: !prevState.navActive}));
+        this.handleNav = this.handleNav.bind(this);
     }
 
     componentDidMount() {
         this.setState({isClient: true});
     }
 
-    scrollTo({target}) {
-        if (target.dataset.target) {
+    handleExpand = () => {
+        this.setState((prevState) => ({navActive: !prevState.navActive}));
+    }
+
+    handleNav({target}) {
+        if (this.props.location === "/" && target.dataset.target) {
             this.props.refs[target.dataset.target].current.scrollIntoView({
                 behavior: "smooth"
             });
+        } else {
+            navigate('/', {state: {scroll: target.dataset.target}});
         }
     }
 
@@ -52,7 +53,6 @@ export default class Navbar extends React.Component {
         return (
             <nav className="navbar is-light" role="navigation" aria-label="main navigation">
                 <Logo>
-    
                     <a onClick={() => this.handleExpand()} role="button" className={`navbar-burger burger ${this.state.navActive && 'is-active'}`} aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -65,10 +65,10 @@ export default class Navbar extends React.Component {
                         <Link to="/" className="navbar-item">
                             Home
                         </Link>
-                        <a onClick={this.scrollTo} data-target="events" className="navbar-item">
+                        <a onClick={this.handleNav} data-target="events" className="navbar-item">
                             Events
                         </a>
-                        <a onClick={this.scrollTo} data-target="about" className="navbar-item">
+                        <a onClick={this.handleNav} data-target="about" className="navbar-item">
                             About
                         </a>
                         <div className="navbar-item has-dropdown is-hoverable">
@@ -76,13 +76,13 @@ export default class Navbar extends React.Component {
                             More
                             </a>
                             <div className="navbar-dropdown">
-                                <a onClick={this.scrollTo} data-target="faq" className="navbar-item">
+                                <a onClick={this.handleNav} data-target="faq" className="navbar-item">
                                     FAQ
                                 </a>
-                                <a onClick={this.scrollTo} data-target="resources" className="navbar-item">
+                                <a onClick={this.handleNav} data-target="resources" className="navbar-item">
                                     Resources
                                 </a>
-                                <a onClick={this.scrollTo} data-target="resources" className="navbar-item">
+                                <a onClick={this.handleNav} data-target="resources" className="navbar-item">
                                     Contact
                                 </a>
                                 <hr className="navbar-divider"/>

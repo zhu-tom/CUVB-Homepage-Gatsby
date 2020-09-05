@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Hero from "../components/hero";
 import Tiles from "../components/tiles";
 import Section from "../components/section";
@@ -8,9 +8,10 @@ import './styles.scss';
 import SEO from "../components/seo";
 import { Accordion } from "../components/accordion";
 
-export default function Home() {
+export default function Home(props) {
+  const scroll = props.location.state && props.location.state.scroll;
   return (
-    <Layout>
+    <Layout location={props.location.pathname} scroll={scroll}>
       <SEO title="Home"/>
       <Hero titleText="Welcome to the Carleton Volleyball Club" size="fullheight-with-navbar"/>
       <Section id="events" hasBgBis>
@@ -53,6 +54,7 @@ export default function Home() {
               <ul>
                 <li><a href="http://www.fivb.org/en/refereeing-rules/documents/FIVB-Volleyball_Rules_2017-2020-EN-v06.pdf" target="_blank">Official FIVB Indoor Rules</a></li>
                 <li><a href="https://www.fivb.org/EN/Refereeing-Rules/Documents/FIVB-BeachVolleyball_Rules_2017-2020-EN-v05.pdf">Official FIVB Beach Rules</a></li>
+                <li><a href="https://cdn3.sportngin.com/attachments/document/282d-2224596/RTP_Document_-_indoor_v2.0.pdf">OVA Return to Play Protocols</a></li>
               </ul>
             </div>
             <div className="column">
