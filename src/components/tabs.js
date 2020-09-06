@@ -39,6 +39,6 @@ export function Tab({children}) {
 }
 
 Tabs.propTypes = {
-    children: PropTypes.element.isRequired,
+    children: PropTypes.arrayOf(PropTypes.element),
     defaultIndex: PropTypes.number,
 }

@@ -37,23 +37,29 @@ export default function Tiles({ limit }) {
                     if (limit) nodes = nodes.slice(0, limit);
                     return nodes.map(({ node }, index) => {
                         return (
-                            <div key={index} className="tile is-parent">
-                                <div style={{justifyContent: "space-between", display: "flex", flexDirection:"column"}} className="tile is-child box">
-                                    <div>
-                                        <p className={`title ${node.subtitle ? "":"is-spaced"}`}>{node.title}</p>
-                                        <p className="subtitle">{node.subtitle}</p>
-                                        <p className={`subtitle mb-1`}><span className="icon mr-2"><FontAwesomeIcon icon={faCalendarAlt}/></span>{node.date && node.date.formattedDate}</p>
-                                        <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faClock}/></span>{node.date.start} - {node.date.end}</p>
-                                        <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
-                                    </div>
-                                    <div>
-                                        <VisitButton event_id={node.mongodb_id}/>
-                                    </div>
-                                </div>
-                            </div>
+                            <EventTile key={index} node={node}/>
                         );
                     });
                 }}/>
+        </div>
+    );
+}
+
+export function EventTile({ node }) {
+    return (
+        <div className="tile is-parent is-3">
+            <div style={{justifyContent: "space-between", display: "flex", flexDirection:"column"}} className="tile is-child box">
+                <div>
+                    <p className={`title ${node.subtitle ? "":"is-spaced"}`}>{node.title}</p>
+                    <p className="subtitle">{node.subtitle}</p>
+                    <p className={`subtitle mb-1`}><span className="icon mr-2"><FontAwesomeIcon icon={faCalendarAlt}/></span>{node.date && (node.date.formattedDate || new Date(node.date.day).toISOString().slice(0,10))}</p>
+                    <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faClock}/></span>{node.date.start} - {node.date.end}</p>
+                    <p className="subtitle mb-1"><span className="icon mr-2"><FontAwesomeIcon icon={faLocationArrow}/></span>{node.location}</p>
+                </div>
+                <div>
+                    <VisitButton event_id={node.mongodb_id || node._id}/>
+                </div>
+            </div>
         </div>
     );
 }
