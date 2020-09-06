@@ -8,14 +8,13 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { getUser } from "../services/auth";
 
-import {StaticQuery, graphql} from 'gatsby';
 import { EventTile } from "./tiles";
 
 export default function Details() {
     const [data, setData] = useState({});
 
     useEffect(() => { 
-        fetch(`${process.env.GATBSY_API_URL || ""}/api/users/query?id=${getUser()._id}`, {
+        fetch(`${process.env.GATSBY_API_URL || ""}/api/users/query?id=${getUser()._id}`, {
             method: "GET",
             headers: {
                 "Authorization": getUser()._id,
