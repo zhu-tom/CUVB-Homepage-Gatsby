@@ -9,9 +9,14 @@ import React, { useState, useEffect } from 'react';
 import { getUser } from "../services/auth";
 
 import { EventTile } from "./tiles";
+import ShowHideInput from "./show-hide-pass";
 
 export default function Details() {
     const [data, setData] = useState({});
+    const [isReset, setIsReset] = useState(false);
+    const [password, setPassword] = useState("");
+    const [confirm, setConfirm] = useState("");
+    const [oldPass, setOldPass] = useState("");
 
     useEffect(() => { 
         fetch(`${process.env.GATSBY_API_URL || ""}/api/users/query?id=${getUser()._id}`, {
@@ -37,8 +42,15 @@ export default function Details() {
                         <Input value={data.email} disabled={true}/>
                     </HorizontalField>
                     <HorizontalField label="Password">
-                        <Button color="primary">Reset Password</Button>
+                        {isReset ? 
+                        <Input isValid value={oldPass} onChange={({target}) => setOldPass(target.value)} placeholder="Old Password"/>
+                        :<Button onClick={() => setIsReset(true)} color="primary">Reset Password</Button>}
                     </HorizontalField>
+                    {isReset && 
+                    <HorizontalField>
+                        <ShowHideInput isValid value={password} onChange={({target}) => setPassword(target.value)} placeholder="New Password"/>
+                        <ShowHideInput isValid value={confirm} onChange={({target}) => setConfirm(target.value)} placeholder="Confirm Password"/>
+                    </HorizontalField>}
                 </Tab>
                 <Tab header="Events">
                     <div className="tile is-ancestor">
